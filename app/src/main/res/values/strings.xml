@@ -6,5 +6,15 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Label for the location setting in preferences [CHAR LIMIT=30] -->
+    <string name="pref_location_label" translatable="false">Location</string>
+
+    <!-- Key name for storing location in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_location_key" translatable="false">location</string>
+
+    <!-- Default value for location in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_location_default" translatable="false">Elkhart</string>
 
 </resources>

@@ -6,14 +6,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class MyActivity extends ActionBarActivity {
+    private static final String LOG_TAG = "Main Activity";
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.v(LOG_TAG, " onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         if (savedInstanceState == null) {
@@ -23,6 +25,35 @@ public class MyActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        Log.v(LOG_TAG, " onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStart() {
+        Log.v(LOG_TAG, " onStart");
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.v(LOG_TAG, " onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.v(LOG_TAG, " onResume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.v(LOG_TAG, " onDestroy");
+        super.onDestroy();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

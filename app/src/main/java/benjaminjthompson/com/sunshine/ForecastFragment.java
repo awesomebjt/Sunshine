@@ -69,6 +69,7 @@ public class ForecastFragment extends Fragment {
                 getString(R.string.pref_location_default)
         );
         FetchWeatherTask fwt = new FetchWeatherTask();
+
         fwt.execute(location);
     }
 
@@ -181,13 +182,8 @@ public class ForecastFragment extends Fragment {
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);
-                StackTraceElement[] stackTraceElements = e.getStackTrace();
-                for(StackTraceElement ste : stackTraceElements) {
-                    Log.e(LOG_TAG, ste.toString());
-                }
-
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(LOG_TAG, "JSON Exception ", e);
             } finally{
                 if (urlConnection != null) {
                     urlConnection.disconnect();
@@ -205,9 +201,14 @@ public class ForecastFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String[] forecasts) {
-            mForecastAdapter.clear();
-            for(String forecast : forecasts) {
-                mForecastAdapter.add(forecast);
+            try {
+                mForecastAdapter.clear();
+                for (String forecast : forecasts) {
+                    mForecastAdapter.add(forecast);
+                }
+            } catch (Exception e) {
+                Log.e(LOG_TAG, "Error populating ForecastAdapter:");
+                Log.e(LOG_TAG, e.toString());
             }
         }
 

@@ -2,11 +2,14 @@ package benjaminjthompson.com.sunshine;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,7 +38,7 @@ import java.util.Date;
 /**
  * Created by bjt on 7/23/2014.
  */
-public class ForecastFragment extends Fragment {
+public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private ArrayAdapter<String> mForecastAdapter;
 
     public ForecastFragment() {
@@ -63,12 +66,8 @@ public class ForecastFragment extends Fragment {
     }
 
     public void FetchForecast() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String location = sharedPref.getString(
-                getString(R.string.pref_location_key),
-                getString(R.string.pref_location_default)
-        );
-        FetchWeatherTask fwt = new FetchWeatherTask();
+        String location = Utility.getPreferredLocation(getActivity());
+        FetchWeatherTask fwt = new FetchWeatherTask(getActivity(), mForecastAdapter);
 
         fwt.execute(location);
     }
@@ -98,7 +97,22 @@ public class ForecastFragment extends Fragment {
         return rootView;
     }
 
-    public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
+    @Override
+    public Loader onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader loader) {
+
+    }
+
+    public class originalFetchWeatherTask extends AsyncTask<String, Void, String[]> {
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
         private String postcode;
         private String units = getString(R.string.pref_units_metric);

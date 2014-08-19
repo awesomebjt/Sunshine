@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,16 +27,13 @@ import java.util.Vector;
 import benjaminjthompson.com.sunshine.data.WeatherContract;
 import benjaminjthompson.com.sunshine.data.WeatherContract.WeatherEntry;
 
-public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
+public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
     private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
-
-    private ArrayAdapter<String> mForecastAdapter;
     private final Context mContext;
 
-    public FetchWeatherTask(Context context, ArrayAdapter<String> forecastAdapter) {
+    public FetchWeatherTask(Context context) {
         mContext = context;
-        mForecastAdapter = forecastAdapter;
     }
 
     /* The date/time conversion code is going to be moved outside the asynctask later,
@@ -112,8 +108,8 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
      * Fortunately parsing is easy:  constructor takes the JSON string and converts it
      * into an Object hierarchy for us.
      */
-    private String[] getWeatherDataFromJson(String forecastJsonStr, int numDays,
-                                            String locationSetting)
+    private void getWeatherDataFromJson(String forecastJsonStr, int numDays,
+                                        String locationSetting)
             throws JSONException {
 
         // These are the names of the JSON objects that need to be extracted.
@@ -162,8 +158,6 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
         // Get and insert the new weather information into the database
         Vector<ContentValues> cVVector = new Vector<ContentValues>(weatherArray.length());
-
-        String[] resultStrs = new String[numDays];
 
         for (int i = 0; i < weatherArray.length(); i++) {
             // These are the values that will be collected.
@@ -221,19 +215,15 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
             weatherValues.put(WeatherEntry.COLUMN_WEATHER_ID, weatherId);
 
             cVVector.add(weatherValues);
-
-            String highAndLow = formatHighLows(high, low);
-            String day = getReadableDateString(dateTime);
-            resultStrs[i] = day + " - " + description + " - " + highAndLow;
         }
         ContentValues[] cvArray = new ContentValues[cVVector.size()];
         cVVector.toArray(cvArray);
         mContext.getContentResolver().bulkInsert(WeatherEntry.CONTENT_URI, cvArray);
-        return resultStrs;
+        return;
     }
 
     @Override
-    protected String[] doInBackground(String... params) {
+    protected Void doInBackground(String... params) {
 
         // If there's no zip code, there's nothing to look up.  Verify size of params.
         if (params.length == 0) {
@@ -318,7 +308,9 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
         }
 
         try {
-            return getWeatherDataFromJson(forecastJsonStr, numDays, params[0]);
+
+            getWeatherDataFromJson(forecastJsonStr, numDays, params[0]);
+            return null;
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
@@ -326,16 +318,5 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
         // This will only happen if there was an error getting or parsing the forecast.
         return null;
-    }
-
-    @Override
-    protected void onPostExecute(String[] result) {
-        if (result != null) {
-            mForecastAdapter.clear();
-            for(String dayForecastStr : result) {
-                mForecastAdapter.add(dayForecastStr);
-            }
-            // New data is back from the server.  Hooray!
-        }
     }
 }

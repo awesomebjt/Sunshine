@@ -157,6 +157,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
             @Override
             public void onItemClick(AdapterView adapterView, View view, int position, long id) {
                 String forecast;
+                String forecast_id;
+                String forecast_date;
                 SimpleCursorAdapter adapter = (SimpleCursorAdapter)adapterView.getAdapter();
                 Cursor cursor = adapter.getCursor();
                 if (cursor.moveToFirst()) {
@@ -174,9 +176,15 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
                     forecast = formattedDate + " - " + shortDesc + " - " + formattedHiTemp + "/"+
                             formattedLoTemp;
-                } else { forecast = "failure"; }
+                    forecast_id = Integer.toString(cursor.getColumnIndex(WeatherEntry._ID));
+                    forecast_date = cursor.getString(date_index);
+                } else {
+                    forecast = "failure";
+                    forecast_id = "0";
+                    forecast_date = "0";
+                }
                 Intent intent = new Intent(getActivity(), DetailActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, forecast);
+                        .putExtra(Intent.EXTRA_TEXT, forecast_date);
                 startActivity(intent);
 
 

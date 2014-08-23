@@ -23,4 +23,7 @@
     <string name="pref_units_metric" translatable="false">metric</string>
     <string name="pref_units_imperial" translatable="false">imperial</string>
 
+    <string name="today" translatable="true">Today</string>
+    <string name="tomorrow" translatable="true">Tomorrow</string>
+
 </resources>

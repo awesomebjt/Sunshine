@@ -96,9 +96,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
             String date = cursor.getString(id_date);
             String desc = cursor.getString(id_desc);
-            String formattedHiTemp = Utility.formatTemperature(
+            String formattedHiTemp = Utility.formatTemperature(getActivity(),
                     cursor.getDouble(id_hi), Utility.isMetric(getActivity()));
-            String formattedLoTemp = Utility.formatTemperature(
+            String formattedLoTemp = Utility.formatTemperature(getActivity(),
                     cursor.getDouble(id_lo), Utility.isMetric(getActivity()));
 
 

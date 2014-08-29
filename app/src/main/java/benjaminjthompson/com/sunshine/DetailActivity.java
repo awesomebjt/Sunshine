@@ -15,12 +15,12 @@ public class DetailActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_detail2);
 
         if (savedInstanceState == null) {
             pf = new DetailFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, pf)
+                    .add(R.id.detailLinearLayout, pf)
                     .commit();
         }
 

@@ -93,6 +93,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             int id_desc = cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_SHORT_DESC);
             int id_hi = cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP);
             int id_lo = cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP);
+            int id_humid = cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_HUMIDITY);
+            int id_wind = cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WIND_SPEED);
+            int id_press = cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_PRESSURE);
 
             String date = cursor.getString(id_date);
             String desc = cursor.getString(id_desc);
@@ -100,12 +103,19 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                     cursor.getDouble(id_hi), Utility.isMetric(getActivity()));
             String formattedLoTemp = Utility.formatTemperature(getActivity(),
                     cursor.getDouble(id_lo), Utility.isMetric(getActivity()));
+            String day = Utility.getDayName(getActivity(), cursor.getString(id_date));
+            String humidity = cursor.getString(id_humid);
+            String windspeed = cursor.getString(id_wind);
+            String pressure = cursor.getString(id_press);
 
-
+            ((TextView)rootView.findViewById(R.id.detail_day_textview)).setText(day);
             ((TextView)rootView.findViewById(R.id.detail_date_textview)).setText(Utility.formatDate(date));
-            ((TextView)rootView.findViewById(R.id.detail_shortdesc_textview)).setText(desc);
+            ((TextView)rootView.findViewById(R.id.detail_desc_textview)).setText(desc);
             ((TextView)rootView.findViewById(R.id.detail_hi_textview)).setText(formattedHiTemp);
             ((TextView)rootView.findViewById(R.id.detail_lo_textview)).setText(formattedLoTemp);
+            ((TextView)rootView.findViewById(R.id.detail_humidity_textview)).setText(humidity);
+            ((TextView)rootView.findViewById(R.id.detail_wind_textview)).setText(windspeed);
+            ((TextView)rootView.findViewById(R.id.detail_press_textview)).setText(pressure);
         }
     }
 

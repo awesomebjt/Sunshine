@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import benjaminjthompson.com.sunshine.data.WeatherContract;
@@ -116,6 +117,15 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             ((TextView)rootView.findViewById(R.id.detail_humidity_textview)).setText(humidity);
             ((TextView)rootView.findViewById(R.id.detail_wind_textview)).setText(windspeed);
             ((TextView)rootView.findViewById(R.id.detail_press_textview)).setText(pressure);
+            ((ImageView)rootView.findViewById(R.id.detail_img_textview)).setImageResource(
+                    Utility.getArtResourceForWeatherCondition(
+                            cursor.getInt(
+                                    cursor.getColumnIndex(
+                                            WeatherContract.WeatherEntry.COLUMN_WEATHER_ID
+                                    )
+                            )
+                    )
+            );
         }
     }
 

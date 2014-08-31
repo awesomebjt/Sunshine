@@ -150,8 +150,6 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
         long locationId = addLocation(locationSetting, cityName, cityLatitude, cityLongitude);
 
-        Log.v(LOG_TAG, cityName + ", with coord: " + cityLatitude + " " + cityLongitude);
-
         // Insert the location into the database.
         // The function referenced here is not yet implemented, so we've commented it out for now.
 //        long locationID = addLocation(locationSetting, cityName, cityLatitude, cityLongitude);
@@ -308,7 +306,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
         }
 
         try {
-
+            Log.v("FORECAST STRING::", forecastJsonStr);
             getWeatherDataFromJson(forecastJsonStr, numDays, params[0]);
             return null;
         } catch (JSONException e) {

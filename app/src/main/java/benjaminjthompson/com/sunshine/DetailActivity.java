@@ -9,18 +9,19 @@ import android.view.MenuItem;
 
 
 public class DetailActivity extends ActionBarActivity {
+    public static final String DATE_KEY = "forecast_date";
     private ShareActionProvider mShareActionProvider;
     private DetailFragment pf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail2);
+        setContentView(R.layout.activity_detail);
 
         if (savedInstanceState == null) {
             pf = new DetailFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.detailLinearLayout, pf)
+                    .add(R.id.weather_detail_container, pf)
                     .commit();
         }
 

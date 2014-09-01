@@ -1,6 +1,5 @@
 package benjaminjthompson.com.sunshine;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -141,11 +141,13 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                     forecast_id = "0";
                     forecast_date = "0";
                 }
-                Intent intent = new Intent(getActivity(), DetailActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, forecast_date);
-                startActivity(intent);
 
-
+                try {
+                    ((MyActivity)getActivity()).onItemSelected(forecast_date);
+                }
+                catch (Exception e) {
+                    Log.e("ForecastFragment", e.getMessage());
+                }
             }
         });
 
@@ -197,3 +199,4 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         mForecastAdapter.swapCursor(null);
     }
 }
+

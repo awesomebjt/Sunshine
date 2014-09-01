@@ -1,7 +1,12 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    tools:layout="@android:layout/list_content"
+    tools:context="benjaminjthompson.com.sunshine.ForecastFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyActivity"
-    tools:ignore="MergeRootFrame" />
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp"
+    android:name="benjaminjthompson.com.sunshine.ForecastFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_forecast"
+    ></fragment>

@@ -32,7 +32,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private String mForecastDate;
     private String mLocation;
     View rootView;
-    private static final int DETAIL_LOADER = 0;
+    private static final int DETAIL_LOADER = 1;
     private static final String LOCATION_KEY = "location";
 
     public static DetailFragment newInstance(int index) {
@@ -80,6 +80,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.v(LOG_TAG, "onCreateView");
 
         Intent intent = getActivity().getIntent();
         rootView = inflater.inflate(R.layout.fragment_detail, container, false);
@@ -88,6 +89,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             getLoaderManager().initLoader(1, null, this);
             //((TextView)rootView.findViewById(R.id.detail_text)).setText(mForecastStr);
 
+        } else {
+            Bundle args = getArguments();
+            mForecastDate = args.getString("date");
+            getLoaderManager().initLoader(1,null,this);
         }
         return rootView;
     }
@@ -117,6 +122,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
+        Log.v(LOG_TAG, "onCreateLoader");
+        if (args != null) {
+            mForecastDate = args.getString("date");
+        }
         Uri weatherUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
                 Utility.getPreferredLocation(getActivity()),
                 mForecastDate);

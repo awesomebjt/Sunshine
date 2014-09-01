@@ -22,8 +22,12 @@ public class MyActivity extends ActionBarActivity implements Callback {
             mTwoPane = true;
 
             if (savedInstanceState == null) {
+                DetailFragment df = new DetailFragment();
+                Bundle args = new Bundle();
+                args.putString("date", "20140901");
+                df.setArguments(args);
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.weather_detail_container, new DetailFragment())
+                        .replace(R.id.weather_detail_container, df)
                         .commit();
             }
         } else {
@@ -96,6 +100,11 @@ public class MyActivity extends ActionBarActivity implements Callback {
         if(mTwoPane) {
             DetailFragment df = new DetailFragment();
             Bundle args = new Bundle();
+            args.putString("date", date);
+            df.setArguments(args);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.weather_detail_container, df)
+                    .commit();
         } else {
             Intent intent = new Intent(this, DetailActivity.class)
                     .putExtra(Intent.EXTRA_TEXT, date);

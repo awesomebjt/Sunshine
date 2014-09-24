@@ -7,11 +7,11 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
+        android:logo="@drawable/ic_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MyActivity"
-            android:label="@string/app_name" >
+            android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,15 +20,17 @@
         </activity>
         <activity
             android:name=".DetailActivity"
+            android:logo="@drawable/ic_launcher"
             android:label="@string/title_activity_detail"
-            android:parentActivityName=".MyActivity" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="benjaminjthompson.com.sunshine.MyActivity" />
         </activity>
         <activity android:name=".SettingsActivity"
+            android:logo="@drawable/ic_launcher"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MyActivity"
+            android:parentActivityName=".MainActivity"
             android:id="@id/action_settings">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value="MyActivity"/>

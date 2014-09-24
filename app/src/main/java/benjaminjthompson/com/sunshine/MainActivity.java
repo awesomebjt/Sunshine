@@ -10,12 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MyActivity extends ActionBarActivity implements Callback {
+public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
     private static final String LOG_TAG = "Main Activity";
     private boolean mTwoPane = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle(null);
         setContentView(R.layout.activity_my);
         //If there's a detail pane, populate it
         if (findViewById(R.id.weather_detail_container) != null) {
@@ -24,7 +25,7 @@ public class MyActivity extends ActionBarActivity implements Callback {
             if (savedInstanceState == null) {
                 DetailFragment df = new DetailFragment();
                 Bundle args = new Bundle();
-                args.putString("date", "20140901");
+                //args.putString("date", "20140901");
                 df.setArguments(args);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.weather_detail_container, df)
@@ -33,6 +34,11 @@ public class MyActivity extends ActionBarActivity implements Callback {
         } else {
             mTwoPane = false;
         }
+
+        ForecastFragment forecastFragment = ((ForecastFragment) getSupportFragmentManager()
+            .findFragmentById(R.id.fragment_forecast));
+        forecastFragment.setUseTodayLayout(!mTwoPane);
+
     }
 
     @Override
@@ -95,12 +101,13 @@ public class MyActivity extends ActionBarActivity implements Callback {
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onItemSelected(String date) {
         if(mTwoPane) {
             DetailFragment df = new DetailFragment();
             Bundle args = new Bundle();
-            args.putString("date", date);
+            args.putString(DetailActivity.DATE_KEY, date);
             df.setArguments(args);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.weather_detail_container, df)

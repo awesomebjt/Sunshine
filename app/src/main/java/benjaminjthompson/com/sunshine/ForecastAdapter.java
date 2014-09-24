@@ -21,6 +21,7 @@ import benjaminjthompson.com.sunshine.data.WeatherContract;
 public class ForecastAdapter extends CursorAdapter {
     public int VIEW_TYPE_TODAY = 0;
     public int VIEW_TYPE_FUTURE_DAY = 1;
+    public boolean mUseTodayLayout;
     public ForecastAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
@@ -31,7 +32,7 @@ public class ForecastAdapter extends CursorAdapter {
         int layoutId = -1;
         if (viewType == VIEW_TYPE_TODAY) {
             layoutId = R.layout.list_item_forecast_today;
-        } else if (viewType == VIEW_TYPE_FUTURE_DAY) {
+        } else /*if (viewType == VIEW_TYPE_FUTURE_DAY)*/ {
             layoutId = R.layout.list_item_forecast;
         }
         View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
@@ -51,10 +52,9 @@ public class ForecastAdapter extends CursorAdapter {
         // Use placeholder image for now
 
         int viewType = getItemViewType(cursor.getPosition());
-        int layoutId = -1;
         if (viewType == VIEW_TYPE_TODAY) {
             viewHolder.iconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
-        } else if (viewType == VIEW_TYPE_FUTURE_DAY) {
+        } else /* if (viewType == VIEW_TYPE_FUTURE_DAY)*/ {
             viewHolder.iconView.setImageResource(Utility.getIconResourceForWeatherCondition(weatherId));
         }
 
@@ -82,9 +82,13 @@ public class ForecastAdapter extends CursorAdapter {
         viewHolder.lowTempView.setText(Utility.formatTemperature(context,low,Utility.isMetric(context)));
     }
 
+    public void setUseTodayLayout(boolean useTodayLayout) {
+        mUseTodayLayout = useTodayLayout;
+    }
+
     @Override
     public int getItemViewType(int position) {
-        return (position == 0) ? VIEW_TYPE_TODAY : VIEW_TYPE_FUTURE_DAY;
+        return (position == 0 && mUseTodayLayout) ? VIEW_TYPE_TODAY : VIEW_TYPE_FUTURE_DAY;
     }
 
     @Override

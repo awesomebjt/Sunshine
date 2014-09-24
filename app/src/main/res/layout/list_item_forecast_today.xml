@@ -17,19 +17,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Today"
-            android:id="@+id/weather_list_date_textview" />
+            android:id="@+id/weather_list_date_textview"
+            android:textAppearance="@android:style/TextAppearance.Large" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="86"
-            android:id="@+id/weather_list_hi_textview" />
+            android:id="@+id/weather_list_hi_textview"
+            android:textSize="72sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="71"
-            android:id="@+id/weather_list_lo_textview" />
+            android:id="@+id/weather_list_lo_textview"
+            android:textIsSelectable="false"
+            android:textSize="32sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -43,12 +47,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/weather_list_image_view"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/art_clear"
+            android:maxHeight="100dp"
+            android:maxWidth="100dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sunny"
-            android:id="@+id/weather_list_desc_textview" />
+            android:id="@+id/weather_list_desc_textview"
+            android:textAppearance="@android:style/TextAppearance.Large" />
     </LinearLayout>
 </LinearLayout>

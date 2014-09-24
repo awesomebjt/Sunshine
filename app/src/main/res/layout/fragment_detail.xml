@@ -14,14 +14,18 @@
             android:layout_height="wrap_content"
             android:text="Today"
             android:id="@+id/detail_day_textview"
-            android:padding="16dp" />
+            android:paddingTop="16dp"
+            android:paddingLeft="16dp"
+            android:textSize="24sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="June 27"
             android:id="@+id/detail_date_textview"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="#ff646464" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -42,7 +46,8 @@
                     android:text="21"
                     android:id="@+id/detail_hi_textview"
                     android:padding="10px"
-                    android:textSize="24dp" />
+                    android:textSize="96sp"
+                    android:textAppearance="@android:style/Theme.DeviceDefault.Light" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -50,7 +55,8 @@
                     android:text="8"
                     android:id="@+id/detail_lo_textview"
                     android:padding="10px"
-                    android:textSize="24dp" />
+                    android:textSize="48sp"
+                    android:textAppearance="@android:style/Theme.DeviceDefault.Light" />
             </LinearLayout>
 
             <LinearLayout
@@ -64,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/detail_img_textview"
-                    android:src="@drawable/ic_launcher"
+                    android:src="@drawable/art_clear"
                     android:layout_gravity="center"
                     android:padding="16dp" />
 
@@ -74,7 +80,9 @@
                     android:text="Sunny"
                     android:id="@+id/detail_desc_textview"
                     android:layout_gravity="center"
-                    android:padding="10px" />
+                    android:padding="10px"
+                    android:textSize="22sp"
+                    android:textColor="#646464" />
 
             </LinearLayout>
         </LinearLayout>
@@ -84,20 +92,26 @@
             android:layout_height="wrap_content"
             android:text="Humidity: 84%"
             android:id="@+id/detail_humidity_textview"
-            android:padding="10px" />
+            android:textSize="22sp"
+            android:paddingLeft="16dp"
+            android:paddingBottom="4dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Wind: 6 km/h"
             android:id="@+id/detail_wind_textview"
-            android:padding="10px" />
+            android:paddingLeft="16dp"
+            android:paddingBottom="4dp"
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pressure: 1014 hPa"
             android:id="@+id/detail_press_textview"
-            android:padding="10px" />
+            android:paddingLeft="16dp"
+            android:paddingBottom="4dp"
+            android:textSize="22sp" />
     </LinearLayout>
 </ScrollView>

@@ -91,7 +91,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
         } else {
             Bundle args = getArguments();
-            mForecastDate = args.getString("date");
+            mForecastDate = args.getString(DetailActivity.DATE_KEY);
             getLoaderManager().initLoader(1,null,this);
         }
         return rootView;

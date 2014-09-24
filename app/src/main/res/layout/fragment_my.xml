@@ -14,5 +14,6 @@
         android:id="@+id/listview_forecast"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
+        style="@style/ForecastListStyle"
         android:layout_alignParentEnd="true" />
 </FrameLayout>
